@@ -2,7 +2,6 @@
 
 import { cn } from "@/lib/utils";
 import {
-    BarChart3,
     Box,
     LayoutDashboard,
     ScanLine,
@@ -12,7 +11,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
 
 const routes = [
     {
@@ -63,24 +61,7 @@ export function Sidebar() {
 
             <div className="flex flex-1 flex-col justify-between overflow-y-auto py-4">
                 <nav className="space-y-1 px-4">
-                    <div className="mb-4">
-                        <Button variant="outline" className="w-full justify-between bg-[#192339] text-white border-none hover:bg-[#192339]/80 rounded-full h-10 px-4">
-                            <div className="flex items-center gap-2">
-                                <Box className="h-4 w-4" />
-                                Sales
-                            </div>
-                            <div className="px-2 py-0.5 rounded text-xs bg-[#24314c]">Seller Coop ⌄</div>
-                        </Button>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 text-xs font-medium text-gray-400 mb-6 pl-2">
-                        <Link href="/opportunities" className="hover:text-white pb-1">Opportunities</Link>
-                        <Link href="/draft-quotes" className="hover:text-white pb-1">Draft Quotes</Link>
-                        <Link href="/quotes" className="hover:text-white pb-1">Quotes</Link>
-                        <Link href="/orders" className="hover:text-white pb-1">Orders</Link>
-                    </div>
-
-                    <div className="space-y-2 mt-8">
+                    <div className="space-y-2 mt-2">
                         {routes.map((route) => (
                             <Link
                                 key={route.href}

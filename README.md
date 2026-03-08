@@ -20,17 +20,24 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+For local development and Vercel deployment, you will need the following environment variables from your Supabase project dashboard:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploying to Vercel
 
-## Deploy on Vercel
+The easiest way to put Recurra into production is using the [Vercel Platform](https://vercel.com/new).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Push your code to a GitHub repository.
+2. Sign in to Vercel and click **Add New Project**.
+3. Import your GitHub repository.
+4. Open the **Environment Variables** section in the Vercel project settings during import.
+5. Paste the two Supabase variables listed above.
+6. Click **Deploy**. Vercel will automatically build the Next.js app and assign you a secure URL.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*(Note: Recurra has been configured with strict HTTP security headers for production, ensuring a trusted environment for optical inventory data.)*

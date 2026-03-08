@@ -1,8 +1,17 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DollarSign, Package, AlertCircle, TrendingUp } from "lucide-react";
-import { mockStats } from "@/lib/mock-data";
+import { useInventoryStore } from "@/store/useInventoryStore";
 
 export function StatsCards() {
+    const products = useInventoryStore((state) => state.products);
+
+    const totalValue = products.reduce((sum, p) => sum + (p.price * p.stock), 0);
+    const totalProducts = products.length;
+    const lowStockItems = products.filter(p => p.stock <= 5).length;
+    const categoriesCount = new Set(products.map(p => p.category)).size;
+
     return (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Card>
@@ -11,7 +20,7 @@ export function StatsCards() {
                     <DollarSign className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold">${mockStats.totalValue.toLocaleString()}</div>
+                    <div className="text-2xl font-bold">${totalValue.toLocaleString()}</div>
                     <p className="text-xs text-muted-foreground flex items-center mt-1">
                         <TrendingUp className="h-3 w-3 mr-1 text-green-500" />
                         <span className="text-green-500 font-medium">+20.1%</span> from last month
@@ -24,9 +33,9 @@ export function StatsCards() {
                     <Package className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold">+{mockStats.totalProducts}</div>
+                    <div className="text-2xl font-bold">{totalProducts}</div>
                     <p className="text-xs text-muted-foreground flex items-center mt-1">
-                        <span className="text-muted-foreground font-medium">+180</span> since last week
+                        <span className="text-muted-foreground font-medium">Live from Inventory</span>
                     </p>
                 </CardContent>
             </Card>
@@ -36,9 +45,9 @@ export function StatsCards() {
                     <AlertCircle className="h-4 w-4 text-destructive" />
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold text-destructive">{mockStats.lowStockItems}</div>
+                    <div className="text-2xl font-bold text-destructive">{lowStockItems}</div>
                     <p className="text-xs text-muted-foreground flex items-center mt-1">
-                        <span className="text-destructive font-medium">+2</span> since yesterday
+                        <span className="text-muted-foreground font-medium">Items with ≤ 5 stock</span>
                     </p>
                 </CardContent>
             </Card>
@@ -59,9 +68,9 @@ export function StatsCards() {
                     </svg>
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold">{mockStats.categories}</div>
+                    <div className="text-2xl font-bold">{categoriesCount}</div>
                     <p className="text-xs text-muted-foreground flex items-center mt-1">
-                        Across all locations
+                        Across all inventory
                     </p>
                 </CardContent>
             </Card>

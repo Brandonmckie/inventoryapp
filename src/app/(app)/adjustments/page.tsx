@@ -12,9 +12,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, Filter, ArrowUpIcon, ArrowDownIcon, Edit3, PackageCheck, Download } from "lucide-react";
-import { mockRecentActivity } from "@/lib/mock-data";
+import { useInventoryStore } from "@/store/useInventoryStore";
 
 export default function AdjustmentsLogPage() {
+    const activities = useInventoryStore(state => state.activities);
     const getActionIcon = (action: string) => {
         switch (action) {
             case "Restock":
@@ -36,8 +37,8 @@ export default function AdjustmentsLogPage() {
                 <h2 className="text-3xl font-bold tracking-tight">Adjustments Log</h2>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 items-center justify-between bg-white p-4 rounded-md border shadow-sm">
-                <div className="flex flex-1 items-center gap-4 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between bg-white p-4 rounded-md border shadow-sm">
+                <div className="flex flex-1 flex-wrap items-center gap-4 w-full sm:w-auto">
                     <div className="relative w-full sm:w-72">
                         <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                         <Input
@@ -77,7 +78,7 @@ export default function AdjustmentsLogPage() {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {mockRecentActivity.map((activity) => (
+                        {activities.map((activity) => (
                             <TableRow key={activity.id}>
                                 <TableCell className="font-medium text-muted-foreground">{activity.date}</TableCell>
                                 <TableCell>
